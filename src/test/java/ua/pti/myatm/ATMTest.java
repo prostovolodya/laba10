@@ -6,6 +6,7 @@
 package ua.pti.myatm;
 
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
@@ -64,7 +65,7 @@ public class ATMTest {
 
     @Test
     public void testCheckBalance() throws NoCardException, BlockedCardException {
-        ATM atm = new ATM(1000);
+        ATM atm = new ATM(1000.0);
         int pin = 1234;
         double balance = 1000.0;
 
@@ -172,6 +173,7 @@ public class ATMTest {
         ATM atm = new ATM(0);
     }
 
+
     @Test
     public void testIsBlockedMethodInvoked() throws BlockedCardException, NoCardException {
         ATM atm = new ATM(1000);
@@ -201,9 +203,15 @@ public class ATMTest {
         when(card.isBlocked()).thenReturn(false);
         when(card.getAccount()).thenReturn(account);
         when(account.getBalance()).thenReturn(1000.0);
+
         atm.setCard(card);
         atm.getCash(amount);
         verify(account, times(1)).withdrow(amount);
+    }
 
+    @Test(expected = NoCardException.class)
+    public void testSetNullCard() throws NoCardException {
+        ATM atm = new ATM(100);
+        atm.setCard(null);
     }
 }
