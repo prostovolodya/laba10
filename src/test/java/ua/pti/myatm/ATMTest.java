@@ -8,6 +8,8 @@ package ua.pti.myatm;
 import junit.framework.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.*;
 /**
  * @author andrii
  */
+
+
 public class ATMTest {
 
     @Test(expected = IllegalArgumentException.class)
@@ -211,7 +215,8 @@ public class ATMTest {
         Assert.assertTrue(atm.validateCard(card, pin));
 
         atm.getCash(amount);
-        verify(account).withdrow(amount);
+
+        verify(account, times(1)).withdrow(anyDouble());
     }
 
 
