@@ -9,7 +9,7 @@ public class ATM {
         if (moneyInATM <= 0) {
             throw new IllegalArgumentException();
         }
-        this.card = null;
+        //this.card = null;
         this.money = moneyInATM;
     }
 
@@ -67,11 +67,5 @@ public class ATM {
         }
     }
 
-    public void setCard(Card card) throws NoCardException {
-        if(card == null ) {
-            throw new NoCardException();
-        } else {
-            this.card = card;
-        }
-    }
+
 }
